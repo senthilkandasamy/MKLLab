@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,10 +27,15 @@ namespace Markel.Claims.Service
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            //Potentially be able to add the Json validator here
+            //services.AddControllers(options => options.ModelMetadataDetailsProviders.Add(new SystemTextJsonValidationMetadataProvider());
             services.AddSingleton(new DatabaseConfig { Name = Configuration["DatabaseName"] });
             services.AddScoped<IDatabaseBootstrap, DatabaseBootstrap>();
             services.AddScoped<IGenericRepository<Markel.Claims.Service.Data.Claims>, ClaimsRepository>();
+            services.AddMvc (options =>
+            {
+                options.Filters.Add(new ProducesAttribute("application/json"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

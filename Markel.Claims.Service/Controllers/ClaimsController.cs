@@ -2,8 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text.Json.Serialization;
+using System.Threading;
 using System.Threading.Tasks;
-
+using System.Text.Json;
 
 namespace Markel.Claims.Service.Controllers
 {
@@ -18,12 +20,17 @@ namespace Markel.Claims.Service.Controllers
             this._claimsRepository = claimsRepository;
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Markel.Claims.Service.Data.Claims>> Get(int ClaimId) 
+        [HttpGet("{ClaimId}")]
+        public async Task<IActionResult> Get(int ClaimId) 
         {
-            var claim = await _claimsRepository.Get(ClaimId);
+            var claimFetched = await _claimsRepository.Get(ClaimId);
 
-            return claim;
+            if(claimFetched == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(claimFetched);
         }
 
         [HttpGet]
@@ -35,20 +42,16 @@ namespace Markel.Claims.Service.Controllers
         }
 
         [HttpPost]
-        public async Task<HttpResponseMessage> Post(Markel.Claims.Service.Data.Claims newClaim)
+        public async Task<IActionResult> Post(Markel.Claims.Service.Data.Claims newClaim)
         {
             if(!TryValidateModel(newClaim,nameof(Markel.Claims.Service.Data.Claims)))
             {
-                return new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
+                return new ValidationFailedResult(base.ModelState);
             }
 
             var inserted = await _claimsRepository.Add(newClaim);
-            if(inserted <= 0)
-            {
-                return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
-            }
 
-            return new HttpResponseMessage(System.Net.HttpStatusCode.OK);
+            return Ok(inserted);
         }
 
         [HttpPut]
