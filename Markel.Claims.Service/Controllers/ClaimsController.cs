@@ -6,6 +6,7 @@ using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Text.Json;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Markel.Claims.Service.Controllers
 {
@@ -25,7 +26,7 @@ namespace Markel.Claims.Service.Controllers
         {
             var claimFetched = await _claimsRepository.Get(ClaimId);
 
-            if(claimFetched == null)
+                if(claimFetched == null)
             {
                 return NotFound();
             }
@@ -55,20 +56,20 @@ namespace Markel.Claims.Service.Controllers
         }
 
         [HttpPut]
-        public async Task<HttpResponseMessage> UpdateClaim(Markel.Claims.Service.Data.Claims newClaim)
+        public async Task<IActionResult> UpdateClaim(Markel.Claims.Service.Data.Claims newClaim)
         {
             if (!TryValidateModel(newClaim, nameof(Markel.Claims.Service.Data.Claims)))
             {
-                return new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
+                return new ValidationFailedResult(base.ModelState);
             }
 
             var inserted = await _claimsRepository.Update(newClaim);
-            if (inserted <= 0)
-            {
-                return new HttpResponseMessage(System.Net.HttpStatusCode.InternalServerError);
-            }
+            //if (inserted <= 0)
+            //{
+            //    return new ValidationFailedResult(base.ModelState);
+            //}
 
-            return new HttpResponseMessage(System.Net.HttpStatusCode.OK);
+            return Ok();
         }
     }
 }

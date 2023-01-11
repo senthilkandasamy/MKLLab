@@ -40,7 +40,7 @@ namespace Markel.Claims.Service.Data
             using (var connection = new SqliteConnection(databaseConfig.Name))
             {
                 connection.Open();
-                var result = await connection.QuerySingleOrDefaultAsync<Claims>("SELECT UCR, rowId, CompanyId, ClaimDate, LossDate, [Assured Name] as AssuredName, [Incurred Loss] as IncurredLoss, Closed, JulianDay(datetime('now')) - JulianDay(ClaimDate) as NumberOfDaysOld FROM Claims where ClaimId = @ClaimId ", new { ClaimId = id });
+                var result = await connection.QuerySingleOrDefaultAsync<Claims>("SELECT UCR, rowId, CompanyId, ClaimDate, LossDate, [Assured Name] as AssuredName, [Incurred Loss] as IncurredLoss, Closed FROM Claims where ClaimId = @ClaimId ", new { ClaimId = id });
                 if (result != null) { return result; }
             }
             return null;

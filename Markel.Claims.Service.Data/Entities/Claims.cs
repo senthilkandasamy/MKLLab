@@ -28,7 +28,7 @@ namespace Markel.Claims.Service.Data
         [JsonConverter(typeof(MarkelBooleanConverter))]
         public bool Closed { get; set; }
 
-        public int NumberOfDaysOld { get; set; }
+        public double NumberOfDaysOld { get { return (LossDate - ClaimDate).TotalDays; } set { this.NumberOfDaysOld = value; } }
     }
 }
     
