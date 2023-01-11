@@ -1,0 +1,12 @@
+us.stackdump
+*.dll
+!/update/ssis_packages/*.dll
+*.suo
+*.csproj.user
+**/.vs/
+**/packages/
+**/obj/
+**/bin/
+for_deployment/
+**/.vs/
+**/*.nupkg
