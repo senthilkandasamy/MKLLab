@@ -1,4 +1,5 @@
 using Markel.Claims.Service.Data;
+using Markel.Claims.Service.Data.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -34,6 +35,7 @@ namespace Markel.Claims.Service
             services.AddSingleton(new DatabaseConfig { Name = Configuration["DatabaseName"] });
             services.AddScoped<IDatabaseBootstrap, DatabaseBootstrap>();
             services.AddScoped<IGenericRepository<Markel.Claims.Service.Data.Claims>, ClaimsRepository>();
+            services.AddScoped<ICompanyRepository, CompanyRepository>();
             services.AddMvc (options =>
             {
                 options.Filters.Add(new ProducesAttribute("application/json"));

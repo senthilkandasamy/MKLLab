@@ -1,9 +1,6 @@
-﻿using Markel.Claims.Service.Data;
-using Markel.Claims.Service.Data.Repository;
-using Microsoft.AspNetCore.Http;
+﻿using Markel.Claims.Service.Data.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Markel.Claims.Service.Controllers
@@ -41,7 +38,7 @@ namespace Markel.Claims.Service.Controllers
             return Ok(companyFetched);
         }
 
-        [HttpGet("{CompanyId}")]
+        [HttpGet("~/GetAllClaims/{CompanyId}")]
         public async Task<IActionResult> GetAllClaims(int CompanyId)
         {
             var companyFetched = await _companyRepository.Get(CompanyId);
