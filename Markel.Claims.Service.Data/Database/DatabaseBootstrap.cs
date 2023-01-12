@@ -53,7 +53,7 @@ namespace Markel.Claims.Service.Data
                                     "Address3 varchar(100), " +
                                     "Postcode varchar(50), " +
                                     "Country varchar(50), " +
-                                    "Active BIT" +
+                                    "Active BIT," +
                                     "InsuranceEndDate DATETIME " +
                                     ")"
                                     );

@@ -19,5 +19,7 @@ namespace Markel.Claims.Service.Data
         [JsonConverter(typeof(MarkelBooleanConverter))]
         public bool IsActive { get; set; }
         public DateTime InsuranceEndDate { get; set; }
+
+        public bool HasActivePolicy { get; set; }
     }
 }

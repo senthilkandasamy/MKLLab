@@ -45,7 +45,7 @@ namespace Markel.Claims.Service.Data.Repository
             using (var connection = new SqliteConnection(databaseConfig.Name))
             {
                 connection.Open();
-                var result = await connection.QuerySingleOrDefaultAsync<Company> ("SELECT Id , CompanyName , Address1 , Address2 , Address3 , PostCode , Country , IsActive , InsuranceEndDate FROM Company where Id  = @CompanyId", new { CompanyId = id });
+                var result = await connection.QuerySingleOrDefaultAsync<Company> ("SELECT Id ,Name , Address1 ,Address2 ,Address3 ,Postcode ,Country ,Active ,InsuranceEndDate From Company INNER JOIN Claims on Company.Id = Claims.CompanyId WHERE Company.Id = @CompanyId", new { CompanyId = id });
                 if (result != null) { return result; }
             }
             return null;
