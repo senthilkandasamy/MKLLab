@@ -41,7 +41,7 @@ namespace Markel.Claims.Service.Data
                 }
 
             var companyTable = connection.Query<string>("SELECT name FROM sqlite_master WHERE type='table' AND name = 'Company';");
-            bTableExists = table.Any(row => row.ToLower().Contains("company"));
+            bTableExists = companyTable.Any(row => row.ToLower().Contains("company"));
             if (bTableExists)
                 return;
 
@@ -57,6 +57,7 @@ namespace Markel.Claims.Service.Data
                                     "InsuranceEndDate DATETIME " +
                                     ")"
                                     );
+            //TODO: Add foreign key constraint between Company and Claims
             connection.Close();
         }
     }
