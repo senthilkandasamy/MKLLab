@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 env:
-#  bucket_name: Markel App
+#  bucket_name: Markel Appl
   AWS_REGION: us-east-2
   REMOTE_HOST: ec2-3-142-232-142.us-east-2.compute.amazonaws.com
   REMOTE_USER: ec2-user
