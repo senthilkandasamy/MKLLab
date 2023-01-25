@@ -15,6 +15,7 @@ namespace Markel.Claims.Service
     {
         public static void Main(string[] args)
         {
+            // Add comment
             IHostBuilder hostBuilder = CreateHostBuilder(args);
             hostBuilder.Start();
         }
