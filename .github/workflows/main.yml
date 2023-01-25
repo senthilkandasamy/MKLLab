@@ -12,7 +12,6 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Deploy to my EC2 instance
-        # uses: 
         env:
           SSH_PRIVATE_KEY: ${{ secrets.MARKELPRIVATEKEY }}
           SOURCE: "./"
