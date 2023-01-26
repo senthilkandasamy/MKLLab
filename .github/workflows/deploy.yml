@@ -17,7 +17,7 @@ permissions:
   id-token: write
 
 jobs:
-  merge-PR:
+  create:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
