@@ -15,7 +15,7 @@ namespace Markel.Claims.Service
     {
         public static void Main(string[] args)
         {
-            // Add comment to trigger push
+            // Add comment to trigger push to aws
             IHostBuilder hostBuilder = CreateHostBuilder(args);
             hostBuilder.Start();
         }
