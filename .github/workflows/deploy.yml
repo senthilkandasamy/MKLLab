@@ -39,9 +39,6 @@ jobs:
           SSH_HOST: ${{ env.HOST_NAME }}
           SSH_USER: ${{ env.REMOTE_USER }}
           SSH_KEY: ${{ secrets.MARKELPRIVATEKEY }} 
-      - name: List home directory
-        if: success()
-        run: ssh ec2 'ls -la'
       - name: Setup .NET Core
         if: success()
         uses: actions/setup-dotnet@v3
@@ -50,9 +47,7 @@ jobs:
       - name : Checkout
         if: success()      
         uses: actions/checkout@v3
-      - name: Setup working directory
-        if: success()      
-        working-directory: ./App
+      - name: Run unit tests please
         run: dotnet test ./Markel.Claims.Service.sln --configuration Release --no-restore --verbosity normal        
       - name: Build with dotnet
         if: success()      
