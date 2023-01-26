@@ -39,27 +39,9 @@ jobs:
           SSH_HOST: ${{ env.HOST_NAME }}
           SSH_USER: ${{ env.REMOTE_USER }}
           SSH_KEY: ${{ secrets.MARKELPRIVATEKEY }} 
-  build:
+  tests:
+    name: Unit Testing
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        dotnet-version: [ '3.1.x' ]
     steps:
       - uses: actions/checkout@v3
-        if: success()
-      - run: dotnet test    
-      - uses: actions/checkout@v3
-        if: success()      
-      - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: ${{ matrix.dotnet-version }}
-      - name: Install dependencies
-        if: success()      
-        run: dotnet restore
-      - name: Build  
-        if: success()      
-        run: dotnet build --configuration Release --no-restore
-      - name: Test
-        if: success()
-        run: dotnet test --no-restore --verbosity normal      
+      - run: dotnet test
