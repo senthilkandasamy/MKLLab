@@ -15,16 +15,19 @@ namespace Markel.Claims.Service
     {
         public static void Main(string[] args)
         {
-            // Add comment to trigger push to aws
-            IHostBuilder hostBuilder = CreateHostBuilder(args);
-            hostBuilder.Start();
+            CreateHostBuilder(args).Build().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+              Host.CreateDefaultBuilder(args)
+                 .ConfigureWebHostDefaults(webBuilder =>
+                 {
+                     webBuilder.ConfigureKestrel(serverOptions =>
+                     {
+                         serverOptions.AddServerHeader = false;
+                     });
+
+                     webBuilder.UseStartup<Startup>();
+                 });
     }
 }
