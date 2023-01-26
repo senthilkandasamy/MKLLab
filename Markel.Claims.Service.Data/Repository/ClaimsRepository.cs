@@ -23,12 +23,12 @@ namespace Markel.Claims.Service.Data
             using(var connection = new SqliteConnection(databaseConfig.Name))
             {
                 connection.Open();
-                var result = await connection.ExecuteAsync("INSERT INTO Claims(UCR, ClaimDate, CompanyId, LossDate, [Assured Name],[Incurred Loss], Closed) values ('" + claim.UCR + "','" + claim.ClaimDate + "','" +
-                                                                       claim.CompanyId + "','" +
-                                                                       claim.LossDate + "','" +
-                                                                       claim.AssuredName + "','" +
-                                                                       claim.IncurredLoss + "','" +
-                                                                       claim.Closed + "')");
+                var result = await connection.ExecuteAsync("INSERT INTO Claims(UCR, ClaimDate, CompanyId, LossDate, [Assured Name],[Incurred Loss], Closed) values ('@ClaimUCR','" + claim.ClaimDate + "','" +
+                                                                       "@CompanyId" + "','" +
+                                                                       "@LossDate" + "','" +
+                                                                       "@AssuredName" + "','" +
+                                                                       "@IncurredLoss" + "','" +
+                                                                       "@Closed" + "')", new { ClaimUCR = claim.UCR , CompanyId = claim.CompanyId, LossDate = claim.LossDate, AssuredName = claim.AssuredName , IncurredLoss = claim.IncurredLoss, Closed = claim.Closed } );
                 return result;
             }
 
