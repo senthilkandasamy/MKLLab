@@ -18,7 +18,6 @@ permissions:
 
 jobs:
   create:
-    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: Git clone the repository
@@ -41,5 +40,8 @@ jobs:
           SSH_KEY: ${{ secrets.MARKELPRIVATEKEY }} 
       - name: List home directory
         run: ssh ec2 'ls -la'
-        
-
+      - name: Build with dotnet
+        run: dotnet build --configuration Release
+      - name: dotnet publish
+        run: |
+         dotnet publish -c Release -o dotnetcorewebapp 
