@@ -40,10 +40,18 @@ jobs:
           SSH_KEY: ${{ secrets.MARKELPRIVATEKEY }} 
       - name: List home directory
         run: ssh ec2 'ls -la'
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 3.1.x
+      - name: Install dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
       - name: Test
-        run: dotnet test ./FactSet.Estimates.Calculation.sln --configuration Release --no-restore --verbosity normal        
+        run: dotnet test ./Markel.Claims.Service.sln --configuration Release --no-restore --verbosity normal        
       - name: Build with dotnet
         run: dotnet build --configuration Release
       - name: dotnet publish
         run: |
-         dotnet publish -c Release -o dotnetcorewebapp 
+         dotnet publish -c Release -o Markel.Claims.Service 
