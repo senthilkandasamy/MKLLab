@@ -30,8 +30,11 @@ jobs:
       with:
         dotnet-version: 3.1
     - name: Restore dependencies
+      if: success()  
       run: dotnet restore
     - name: Build
+      if: success()  
       run: dotnet build --no-restore
     - name: Test
+      if: success()      
       run: dotnet test --no-build --verbosity normal
