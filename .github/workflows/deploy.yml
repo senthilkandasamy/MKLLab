@@ -41,8 +41,6 @@ jobs:
           SSH_KEY: ${{ secrets.MARKELPRIVATEKEY }} 
       - name: List home directory
         run: ssh ec2 'ls -la'
-      - name: Setup working director
-        working-directory: ./App      
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v3
         with:
@@ -51,7 +49,10 @@ jobs:
         run: dotnet restore
       - name: Build
         run: dotnet build --configuration Release --no-restore
-      - name: Test
+      - name : Checkout
+        uses: actions/checkout@v3
+      - name: Setup working directory
+        working-directory: ./App
         run: dotnet test ./Markel.Claims.Service.sln --configuration Release --no-restore --verbosity normal        
       - name: Build with dotnet
         run: dotnet build --configuration Release
