@@ -43,17 +43,19 @@ jobs:
         if: success()
         run: ssh ec2 'ls -la'
       - name: Setup .NET Core
+        if: success()
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 3.1.x
-      - name: Build
-        run: dotnet build --configuration Release --no-restore
       - name : Checkout
+        if: success()      
         uses: actions/checkout@v3
       - name: Setup working directory
+        if: success()      
         working-directory: ./App
         run: dotnet test ./Markel.Claims.Service.sln --configuration Release --no-restore --verbosity normal        
       - name: Build with dotnet
+        if: success()      
         run: dotnet build --configuration Release
       - name: dotnet publish
         run: |
