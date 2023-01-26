@@ -46,6 +46,9 @@ jobs:
         dotnet-version: [ '3.1.x' ]
     steps:
       - uses: actions/checkout@v3
+        if: success()
+      - run: dotnet test    
+      - uses: actions/checkout@v3
         if: success()      
       - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
         uses: actions/setup-dotnet@v3
