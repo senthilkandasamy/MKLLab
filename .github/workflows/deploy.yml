@@ -22,6 +22,7 @@ jobs:
     steps:
       - name: Git clone the repository
         uses: actions/checkout@v3
+
       - name: Configure SSH
         run: |
           mkdir -p ~/.ssh/
@@ -40,6 +41,8 @@ jobs:
           SSH_KEY: ${{ secrets.MARKELPRIVATEKEY }} 
       - name: List home directory
         run: ssh ec2 'ls -la'
+      - name: Setup working director
+        working-directory: ./App      
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v3
         with:
