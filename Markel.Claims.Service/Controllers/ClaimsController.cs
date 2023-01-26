@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Text.Json;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Markel.Claims.Service.Controllers
 {
@@ -43,6 +44,7 @@ namespace Markel.Claims.Service.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Post(Markel.Claims.Service.Data.Claims newClaim)
         {
             if(!TryValidateModel(newClaim,nameof(Markel.Claims.Service.Data.Claims)))
