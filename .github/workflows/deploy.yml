@@ -41,7 +41,7 @@ jobs:
       - name: List home directory
         run: ssh ec2 'ls -la'
       - name: Test
-        run: dotnet test --no-restore --verbosity normal        
+        run: dotnet test ./FactSet.Estimates.Calculation.sln --configuration Release --no-restore --verbosity normal        
       - name: Build with dotnet
         run: dotnet build --configuration Release
       - name: dotnet publish
