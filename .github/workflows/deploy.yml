@@ -45,9 +45,10 @@ jobs:
         with:
           dotnet-version: 3.1.x
       - name : Checkout
-        if: success()      
+        if: success()  
         uses: actions/checkout@v3
       - name: Run unit tests please
+        if: success()      
         run: dotnet test ./Markel.Claims.Service.sln --configuration Release --no-restore --verbosity normal        
       - name: Build with dotnet
         if: success()      
