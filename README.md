@@ -1,5 +1,5 @@
 # MarkelLab
-Asp.net core service for Markel Assessment. This application is built with few assumptions:
+Asp.net core service. This application is built with few assumptions:
 1. The code should be production ready with data created via code
 
 # Markel Claims Service
