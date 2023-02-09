@@ -1,6 +1,6 @@
-# MarkelLab
-Asp.net core service. This application is built with few assumptions:
-1. The code should be production ready with data created via code
+# In Memory database example
+Asp.net core service that consumes in-memory database - Sqlite
+
 
 # Markel Claims Service
 Built using Asp.Net core 3.1 and Dapper ORM
