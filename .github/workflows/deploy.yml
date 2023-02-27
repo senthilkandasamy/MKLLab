@@ -17,20 +17,9 @@ permissions:
   id-token: write
 
 jobs:
-  build:
-    defaults:
-      run:
-        working-directory: App
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3    
-    - name: Build  
-      if: success()      
-      run: dotnet build --configuration Release --no-restore
   build-and-test:
     runs-on: ubuntu-latest    
     if: success()  
-    needs: [build]    
     steps:
     - name: Restore dependencies
       if: success()  
